@@ -1,3 +1,39 @@
 .App {
   text-align: center;
+  margin: 0;
+  padding: 0;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+  justify-content: center;
+  display: flex;
+}
+
+.main-container {
+  width: 1000px;
+  display: flex;
+  flex-flow: column;
+  border: 1px solid #000000;
+}
+
+.title-wrapper {
+  align-items: center;
+  background-color: #DDDDDD;
+  border-bottom: 1px solid #000000;
+}
+
+.title {
+  margin: 10px;
+  font-size: 30px;
+}
+
+.checkbox-wrapper {
+  margin: auto;
+  width: 80%;
+}
+
+.checkbox-title {
+  padding: 10px;
+  width: 100px;
+  border: 1px solid #000000;
 }
