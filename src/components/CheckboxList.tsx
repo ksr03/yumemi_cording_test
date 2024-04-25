@@ -5,6 +5,7 @@ import Checkbox from './Checkbox';
 interface prefectureType {
   prefCode: number
   prefName: string 
+  isChecked: boolean
 }
 
 interface prefectureListType {
@@ -13,14 +14,38 @@ interface prefectureListType {
 }
 
 function CheckboxList(): JSX.Element {
-  // 都道府県のリスト
-  const [prefectureList, setPrefectureList] = useState<prefectureType[] | null>(null)
+  // 都道府県データのリスト
+  const [prefList, setPrefList] = useState<prefectureType[] | null>(null)
+  
+  /**
+   * 指定された都道府県のisCheckedを反転させる
+   * @param prefCode 指定する都道府県のprefCode 
+   */
+  const handleIsChecked: (prefCode: number) => void = (prefCode) => {
+    setPrefList(prev => {
+      if (prev === null) return null;
+      return prev.map(pref => {
+        if(pref.prefCode === prefCode) {
+          return {
+            ...pref,
+            isChecked: !pref.isChecked
+          }
+        }
+        return pref
+      })
+    })
+  }
 
   useEffect(() => {
+    // 都道府県データを取得
     axios
     .get<prefectureListType>('https://opendata.resas-portal.go.jp/api/v1/prefectures', {headers: {'X-API-KEY': process.env.REACT_APP_API_KEY}})
     .then((response) => {
-      setPrefectureList(response.data.result)
+      const newPrefList = response.data.result.map((pref) => ({
+        ...pref,
+        isChecked: false
+      }))
+      setPrefList(newPrefList)
     })
     .catch((error) => {
       console.error(error)
@@ -31,8 +56,8 @@ function CheckboxList(): JSX.Element {
     <div className='checkbox-container'>
       <h2 className='checkbox-title'>都道府県</h2>
       <div className='checkbox-wrapper'>
-        {prefectureList?.map((item, index) => {
-          return <Checkbox key={index} prefName={item.prefName}/>
+        {prefList?.map((item, index) => {
+          return <Checkbox key={index} prefCode={item.prefCode} prefName={item.prefName} handleIsChecked={handleIsChecked}/>
         })}
       </div>
     </div>
