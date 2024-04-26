@@ -5,6 +5,7 @@ import type { SeriesOptionsType } from 'highcharts';
 import HighchartsReact from "highcharts-react-official";
 import type { prefType } from '../types/prefType';
 import { baseURL } from '../data/baseURL';
+import highchartsAccessibility from "highcharts/modules/accessibility";
 
 interface responseType {
   message: string
@@ -23,6 +24,7 @@ interface Props {
 }
 
 function Graph(props: Props): JSX.Element {
+  highchartsAccessibility(Highcharts);
   // 各都道府県の人口構成データ
   const [series, setSeries] = useState<SeriesOptionsType[]>([])
   // グラフの横軸目盛り
@@ -67,7 +69,7 @@ function Graph(props: Props): JSX.Element {
     },
     series,
     accessibility: {
-      enabled: false
+      enabled: true
     }
   }
 
