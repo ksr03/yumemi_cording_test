@@ -58,3 +58,16 @@
   height: 22px;
   cursor: pointer;
 }
+
+.select-box-wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.select-box {
+  margin: 15px;
+  margin-right: 25px;
+  width: 200px;
+  height: 35px;
+  font-size: 23px;
+}

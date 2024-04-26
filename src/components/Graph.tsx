@@ -19,11 +19,13 @@ interface responseType {
 
 interface Props {
   prefList: prefType[]
+  option: string
 }
 
 function Graph(props: Props): JSX.Element {
   // 各都道府県の人口構成データ
   const [series, setSeries] = useState<SeriesOptionsType[]>([])
+  // グラフの横軸目盛り
   const [categories, setCategories] = useState<string[]>([])
 
   // 各都道府県の人口構成データを取得する
@@ -38,7 +40,7 @@ function Graph(props: Props): JSX.Element {
           return [...prev, {
             name: pref.prefName,
             type: 'line',
-            data: response.data.result.data[0].data.map(item => item.value)
+            data: response.data.result.data.filter(item => item.label === props.option)[0].data.map(item => item.value)
           }]
         })
       })
@@ -46,7 +48,7 @@ function Graph(props: Props): JSX.Element {
         console.error(error)
       })
     }
-  }, [props.prefList])
+  }, [props.prefList, props.option])
 
   const options: Highcharts.Options = {
     title: {
