@@ -65,7 +65,10 @@ function Graph(props: Props): JSX.Element {
         text: '人口'
       }
     },
-    series
+    series,
+    accessibility: {
+      enabled: false
+    }
   }
 
   return (
