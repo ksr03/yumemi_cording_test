@@ -8,12 +8,14 @@ interface prefectureType {
   isChecked: boolean
 }
 
-interface prefectureListType {
+interface responseType {
   message: string
   result: prefectureType[]
 }
 
 function CheckboxList(): JSX.Element {
+  const baseURL = 'https://opendata.resas-portal.go.jp/'
+
   // 都道府県データのリスト
   const [prefList, setPrefList] = useState<prefectureType[] | null>(null)
   
@@ -39,7 +41,7 @@ function CheckboxList(): JSX.Element {
   useEffect(() => {
     // 都道府県データを取得
     axios
-    .get<prefectureListType>('https://opendata.resas-portal.go.jp/api/v1/prefectures', {headers: {'X-API-KEY': process.env.REACT_APP_API_KEY}})
+    .get<responseType>(baseURL + 'api/v1/prefectures', {headers: {'X-API-KEY': process.env.REACT_APP_API_KEY}})
     .then((response) => {
       const newPrefList = response.data.result.map((pref) => ({
         ...pref,
