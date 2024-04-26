@@ -27,7 +27,7 @@
   font-size: 30px;
 }
 
-.checkbox-wrapper {
+.checkbox-container {
   margin: auto;
   width: 80%;
 }
@@ -36,4 +36,25 @@
   padding: 10px;
   width: 100px;
   border: 1px solid #000000;
+}
+
+.checkbox-label {
+  margin: 10px;
+  display: flex;
+  font-size: 22px;
+  white-space: nowrap;
+  line-height: 40px;
+  cursor: pointer;
+}
+
+.checkbox-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+}
+
+.checkbox {
+  margin-right: 8px;
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
 }
