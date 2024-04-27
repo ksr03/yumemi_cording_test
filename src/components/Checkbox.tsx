@@ -8,7 +8,7 @@ interface Props {
 
 function Checkbox(props: Props): JSX.Element {
   // チェックボックスをクリックしたらリストに追加する
-  const onChange: (event: React.ChangeEvent<HTMLInputElement>) => void = (event) => {
+  const onChange: () => void = () => {
     props.updatePrefList(props.pref)
   }
   return (

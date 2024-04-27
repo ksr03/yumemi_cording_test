@@ -1,12 +1,13 @@
 import React from 'react';
+import type { optionType } from '../types/optionType';
 
 interface Props {
-    handleOption: (event: React.ChangeEvent<HTMLInputElement>) => void
+    handleOption: (value: optionType) => void
 }
 
 function SelectBox(props: Props): JSX.Element {
   return (
-    <div className='select-box-wrapper' defaultValue='総人口' onChange={props.handleOption}>
+    <div className='select-box-wrapper' defaultValue='総人口' onChange={(event: React.ChangeEvent<HTMLInputElement>) => {props.handleOption(event.target.value as optionType)}}>
       <select className='select-box'>
         <option value='総人口'>総人口</option>
         <option value='年少人口'>年少人口</option>

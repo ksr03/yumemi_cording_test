@@ -1,41 +1,61 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import Checkbox from './Checkbox';
 import type { prefType } from '../types/prefType';
-import { baseURL } from '../data/baseURL';
-
-interface responseType {
-  message: string
-  result: prefType[]
-}
+import { getPrefectures } from '../hooks/getPrefectures';
 
 interface Props {
   prefList: prefType[]
-  updatePrefList: (target: prefType) => void
+  handlePrefList: (target: prefType[]) => void
 }
 
 function CheckboxList(props: Props): JSX.Element {
-  // 取得した全都道府県のデータ
+  // 都道府県のデータ
   const [prefData, setPrefData] = useState<prefType[]>([])
+  // 選択された都道府県のリスト
+  const [prefList, setPrefList] = useState<prefType[]>([])
+
+  /**
+   * 都道府県のデータを取得してセットする
+   */
+  const fetchData = async(): Promise<void> => {
+    try {
+      setPrefData(await getPrefectures())
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  /**
+   * チェックされた都道府県をリストに追加する
+   * @param target 対象となる都道府県
+   */
+  const updatePrefList: (target: prefType) => void = (target) => {
+    setPrefList(prev => {
+      // リストに都道府県があれば削除する
+      if (prev?.some((pref) => pref.prefCode === target.prefCode))
+        return prev.filter((pref) => pref !== target)
+      // リストに都道府県が無ければ追加する
+      else 
+        return [...prev, target];
+    })
+  }
 
   useEffect(() => {
-    // 全都道府県データを取得
-    axios
-    .get<responseType>(baseURL + 'api/v1/prefectures', {headers: {'X-API-KEY': process.env.REACT_APP_API_KEY}})
-    .then((response) => {
-      setPrefData(response.data.result)
-    })
-    .catch((error) => {
+    fetchData().catch(error => {
       console.error(error)
     })
   }, []);
+
+  useEffect(() => {
+    props.handlePrefList(prefList)
+  }, [prefList])
   
   return (
     <div className='checkbox-container'>
       <h2 className='checkbox-title'>都道府県</h2>
       <div className='checkbox-wrapper'>
-        {prefData?.map((item, index) => {
-          return <Checkbox key={index} pref={item} updatePrefList={props.updatePrefList}/>
+        {prefData?.map((pref, index) => {
+          return <Checkbox key={index} pref={pref} updatePrefList={updatePrefList}/>
         })}
       </div>
     </div>
