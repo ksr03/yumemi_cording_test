@@ -37,7 +37,7 @@ function Graph(props: Props): JSX.Element {
       axios
       .get<responseType>(baseURL + `api/v1/population/composition/perYear?prefCode=${pref.prefCode}&cityCode=-`, {headers: {'X-API-KEY': process.env.REACT_APP_API_KEY}})
       .then((response) => {
-        categories.length === 0 ? setCategories(response.data.result.data[0].data.map(item => String(item.year))) : 
+        setCategories(response.data.result.data[0].data.map(item => String(item.year)))
         setSeries(prev => {
           return [...prev, {
             name: pref.prefName,
