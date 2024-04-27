@@ -9,7 +9,7 @@ describe('App', () => {
     const { getByText, getByTestId } = render(<App />);
 
     // タイトルが表示されていることを確認
-    expect(getByText('コーディング試験')).toBeInTheDocument();
+    expect(getByText('都道府県別の人口推移グラフ')).toBeInTheDocument();
 
     // チェックボックスリストが表示されていることを確認
     expect(getByText('都道府県')).toBeInTheDocument();

@@ -13,7 +13,7 @@ function Checkbox(props: Props): JSX.Element {
   }
   return (
     <>
-      <label className='checkbox-label'>
+      <label className='checkbox-wrapper'>
         <input className='checkbox' type='checkbox' name='test' onChange={onChange}/>
         {props.pref.prefName}
       </label>
