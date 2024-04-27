@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Highcharts from "highcharts";
-import type { SeriesOptionsType } from 'highcharts';
 import HighchartsReact from "highcharts-react-official";
-import type { prefType } from '../types/prefType';
 import highchartsAccessibility from "highcharts/modules/accessibility";
+import type { SeriesOptionsType } from 'highcharts';
+import type { prefType } from '../types/prefType';
 import type { optionType } from '../types/optionType';
 import { getPopulation } from '../hooks/getPopulation';
 import type { populationType } from '../types/poplationType';
@@ -53,18 +53,54 @@ function Graph(props: Props): JSX.Element {
   }, [props.prefList, props.option])
 
   const options: Highcharts.Options = {
+    chart: {
+      marginRight: 50,
+      marginLeft: 100,
+    },
     title: {
-      text: '人口推移'
+      text: '人口推移',
+      style: {
+        fontSize: '24px',
+        fontWeight: 'bold',
+        fontFamily: 'Noto Sans JP'
+      }
+    },
+    subtitle: {
+      text: props.option,
+      style: {
+        fontSize: '16px',
+        fontWeight: 'bold',
+        fontFamily: 'Noto Sans JP',
+      }
     },
     xAxis: {
       title: {
-        text: '年'
+        text: '年',
+        style: {
+          fontSize: '16px',
+          fontWeight: 'bold',
+          fontFamily: 'Noto Sans JP',
+          color: 'black'
+        }
       },
       categories
     },
     yAxis: {
       title: {
-        text: '人口数'
+        text: '人口数',
+        style: { 
+          fontSize: '16px',
+          fontWeight: 'bold',
+          fontFamily: 'Noto Sans JP',
+          color: 'black'
+        }
+      }
+    },
+    legend: {
+      itemStyle: {
+        fontSize: '18px',
+        fontWeight: 'bold',
+        fontFamily: 'Noto Sans JP',
       }
     },
     series,

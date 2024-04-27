@@ -51,9 +51,9 @@ function CheckboxList(props: Props): JSX.Element {
   }, [prefList])
   
   return (
-    <div className='checkbox-container'>
+    <div className='pref-container'>
       <h2 className='checkbox-title'>都道府県</h2>
-      <div className='checkbox-wrapper'>
+      <div className='checkbox-container'>
         {prefData?.map((pref, index) => {
           return <Checkbox key={index} pref={pref} updatePrefList={updatePrefList}/>
         })}

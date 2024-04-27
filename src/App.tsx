@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './App.css';
+import './style/App.css';
 import CheckboxList from './components/CheckboxList';
 import Graph from './components/Graph';
 import Title from './components/Title';
