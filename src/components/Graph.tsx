@@ -74,7 +74,9 @@ function Graph(props: Props): JSX.Element {
   }
 
   return (
-    <HighchartsReact highcharts={Highcharts} options={options}/>
+    <div data-testid="graph-container">
+      <HighchartsReact highcharts={Highcharts} options={options}/>
+    </div>
   )
 }
 
