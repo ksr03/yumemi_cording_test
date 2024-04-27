@@ -24,7 +24,9 @@ interface Props {
 }
 
 function Graph(props: Props): JSX.Element {
+  // Highchartsのアクセシビリティモジュールの読み込み
   highchartsAccessibility(Highcharts);
+
   // 各都道府県の人口構成データ
   const [series, setSeries] = useState<SeriesOptionsType[]>([])
   // グラフの横軸目盛り
@@ -37,7 +39,7 @@ function Graph(props: Props): JSX.Element {
       axios
       .get<responseType>(baseURL + `api/v1/population/composition/perYear?prefCode=${pref.prefCode}&cityCode=-`, {headers: {'X-API-KEY': process.env.REACT_APP_API_KEY}})
       .then((response) => {
-        setCategories(response.data.result.data[0].data.map(item => String(item.year)))
+        if (categories.length === 0) setCategories(response.data.result.data[0].data.map(item => String(item.year)))
         setSeries(prev => {
           return [...prev, {
             name: pref.prefName,
@@ -58,13 +60,13 @@ function Graph(props: Props): JSX.Element {
     },
     xAxis: {
       title: {
-        text: '年度'
+        text: '年'
       },
       categories
     },
     yAxis: {
       title: {
-        text: '人口'
+        text: '人口数'
       }
     },
     series,

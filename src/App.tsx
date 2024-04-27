@@ -5,14 +5,15 @@ import Graph from './components/Graph';
 import Title from './components/Title';
 import SelectBox from './components/SelectBox';
 import type { prefType } from './types/prefType';
+import type { optionType } from './types/optionType';
 
 function App(): JSX.Element  {
   // 選択された都道府県のリスト
   const [prefList, setPrefList] = useState<prefType[]>([])
-  // セレクトボックスでの選択
-  const [option, setOption] = useState<string>('総人口')
-  const handleOption: (event: React.ChangeEvent<HTMLInputElement>) => void = (event) => {
-    setOption(event.target.value)
+  // セレクトボックスの選択
+  const [option, setOption] = useState<optionType>('総人口')
+  const handleOption: (value: optionType) => void = (value) => {
+    setOption(value)
   }
 
   /**
