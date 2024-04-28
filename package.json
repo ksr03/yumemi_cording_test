@@ -27,7 +27,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "fmt": "prettier --write src/**/*.ts src/**/*.tsx",
-    "lint": "eslint --no-ignore ./src/index.tsx"
+    "lint": "eslint"
   },
   "eslintConfig": {
     "extends": [

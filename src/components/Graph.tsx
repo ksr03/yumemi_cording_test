@@ -14,7 +14,6 @@ interface Props {
 }
 
 function Graph(props: Props): JSX.Element {
-  // Highchartsのアクセシビリティモジュールの読み込み
   highchartsAccessibility(Highcharts)
 
   // 各都道府県の人口推移データ
