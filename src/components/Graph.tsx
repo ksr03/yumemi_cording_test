@@ -13,7 +13,7 @@ interface Props {
   selectedOption: optionType
 }
 
-function Graph(props: Props): JSX.Element {
+function Graph (props: Props): JSX.Element {
   highchartsAccessibility(Highcharts)
 
   // 各都道府県の人口推移データ
@@ -28,8 +28,9 @@ function Graph(props: Props): JSX.Element {
   const fetchData = async (pref: prefType): Promise<void> => {
     try {
       const response: populationType[] = await getPopulation({ pref })
-      if (categories.length === 0)
+      if (categories.length === 0) {
         setCategories(response[0].data.map((item) => String(item.year)) ?? [])
+      }
       setSeries((prev) => {
         return [
           ...prev,
@@ -39,8 +40,8 @@ function Graph(props: Props): JSX.Element {
             data:
               response
                 .filter((item) => item.label === props.selectedOption)[0]
-                .data.map((item) => item.value) ?? [],
-          },
+                .data.map((item) => item.value) ?? []
+          }
         ]
       })
     } catch (error) {
@@ -61,23 +62,23 @@ function Graph(props: Props): JSX.Element {
   const options: Highcharts.Options = {
     chart: {
       marginRight: 50,
-      marginLeft: 100,
+      marginLeft: 100
     },
     title: {
       text: '人口推移',
       style: {
         fontSize: '24px',
         fontWeight: 'bold',
-        fontFamily: 'Noto Sans JP',
-      },
+        fontFamily: 'Noto Sans JP'
+      }
     },
     subtitle: {
       text: props.selectedOption,
       style: {
         fontSize: '16px',
         fontWeight: 'bold',
-        fontFamily: 'Noto Sans JP',
-      },
+        fontFamily: 'Noto Sans JP'
+      }
     },
     xAxis: {
       title: {
@@ -86,10 +87,10 @@ function Graph(props: Props): JSX.Element {
           fontSize: '16px',
           fontWeight: 'bold',
           fontFamily: 'Noto Sans JP',
-          color: 'black',
-        },
+          color: 'black'
+        }
       },
-      categories,
+      categories
     },
     yAxis: {
       title: {
@@ -98,21 +99,21 @@ function Graph(props: Props): JSX.Element {
           fontSize: '16px',
           fontWeight: 'bold',
           fontFamily: 'Noto Sans JP',
-          color: 'black',
-        },
-      },
+          color: 'black'
+        }
+      }
     },
     legend: {
       itemStyle: {
         fontSize: '18px',
         fontWeight: 'bold',
-        fontFamily: 'Noto Sans JP',
-      },
+        fontFamily: 'Noto Sans JP'
+      }
     },
     series,
     accessibility: {
-      enabled: true,
-    },
+      enabled: true
+    }
   }
 
   return (

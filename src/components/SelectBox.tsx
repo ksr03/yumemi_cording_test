@@ -5,7 +5,7 @@ interface Props {
   handleOption: (value: optionType) => void
 }
 
-function SelectBox(props: Props): JSX.Element {
+function SelectBox (props: Props): JSX.Element {
   return (
     <div
       className="select-box-wrapper"

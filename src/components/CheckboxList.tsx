@@ -8,7 +8,7 @@ interface Props {
   handlePrefList: (target: prefType[]) => void
 }
 
-function CheckboxList(props: Props): JSX.Element {
+function CheckboxList (props: Props): JSX.Element {
   // 都道府県のデータ
   const [prefData, setPrefData] = useState<prefType[]>([])
   // 選択された都道府県のリスト
@@ -32,10 +32,12 @@ function CheckboxList(props: Props): JSX.Element {
   const updatePrefList: (target: prefType) => void = (target) => {
     setPrefList((prev) => {
       // リストに都道府県があれば削除する
-      if (prev?.some((pref) => pref.prefCode === target.prefCode))
+      if (prev?.some((pref) => pref.prefCode === target.prefCode)) {
         return prev.filter((pref) => pref !== target)
-      // リストに都道府県が無ければ追加する
-      else return [...prev, target]
+      } else {
+        // リストに都道府県がなければ追加する
+        return [...prev, target]
+      }
     })
   }
 

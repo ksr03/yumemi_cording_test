@@ -8,7 +8,7 @@ describe('CheckboxList', () => {
     const mockHandlePrefList = jest.fn()
 
     const { getByText } = render(
-      <CheckboxList prefList={[]} handlePrefList={mockHandlePrefList} />,
+      <CheckboxList prefList={[]} handlePrefList={mockHandlePrefList} />
     )
 
     await waitFor(() => {
@@ -23,7 +23,7 @@ describe('CheckboxList', () => {
     const mockHandlePrefList = jest.fn()
 
     const { getByText } = render(
-      <CheckboxList prefList={[]} handlePrefList={mockHandlePrefList} />,
+      <CheckboxList prefList={[]} handlePrefList={mockHandlePrefList} />
     )
 
     await waitFor(() => {

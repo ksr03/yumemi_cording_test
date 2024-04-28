@@ -6,7 +6,7 @@ import SelectBox from '../components/SelectBox'
 import type { prefType } from '../types/prefType'
 import type { optionType } from '../types/optionType'
 
-function Home(): JSX.Element {
+function Home (): JSX.Element {
   // 選択された都道府県のリスト
   const [prefList, setPrefList] = useState<prefType[]>([])
   const handlePrefList: (newPrefList: prefType[]) => void = (newPrefList) => {

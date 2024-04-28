@@ -8,7 +8,6 @@ module.exports = {
       'plugin:react/recommended',
       'plugin:@typescript-eslint/recommended',
       'plugin:@typescript-eslint/recommended-requiring-type-checking',
-      'plugin:prettier/recommended'
     ],
     overrides: [
       {
@@ -29,11 +28,10 @@ module.exports = {
       tsconfigRootDir: __dirname,
       project: ['./tsconfig.json'],
     },
-    plugins: ['react', '@typescript-eslint', 'prettier'],
+    plugins: ['react', '@typescript-eslint'],
     rules: {
       'react/jsx-uses-react': 'off',
       'react/react-in-jsx-scope': 'off',
-      'prettier/prettier': 'error',
     },
     ignorePatterns: [
       'build/',
