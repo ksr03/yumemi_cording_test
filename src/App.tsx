@@ -15,7 +15,7 @@ function App(): JSX.Element  {
   }
   
   // セレクトボックスの選択
-  const [option, setOption] = useState<optionType>('総人口')
+  const [selectedOption, setOption] = useState<optionType>('総人口')
   const handleOption: (value: optionType) => void = (value) => {
     setOption(value)
   }
@@ -27,7 +27,7 @@ function App(): JSX.Element  {
         <CheckboxList prefList={prefList} handlePrefList ={handlePrefList}/>
         <div>
           <SelectBox handleOption={handleOption}/>
-          <Graph prefList={prefList} option={option}/>
+          <Graph prefList={prefList} selectedOption={selectedOption}/>
         </div>
       </div>
     </div>

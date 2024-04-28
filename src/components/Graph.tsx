@@ -10,7 +10,7 @@ import type { populationType } from '../types/poplationType';
 
 interface Props {
   prefList: prefType[]
-  option: optionType
+  selectedOption: optionType
 }
 
 function Graph(props: Props): JSX.Element {
@@ -34,7 +34,7 @@ function Graph(props: Props): JSX.Element {
         return [...prev, {
           name: pref.prefName,
           type: 'line',
-          data: response.filter(item => item.label === props.option)[0].data.map(item => item.value) ?? []
+          data: response.filter(item => item.label === props.selectedOption)[0].data.map(item => item.value) ?? []
         }]
       })
     } catch (error) {
@@ -50,7 +50,7 @@ function Graph(props: Props): JSX.Element {
         console.error(error)
       })
     }
-  }, [props.prefList, props.option])
+  }, [props.prefList, props.selectedOption])
 
   const options: Highcharts.Options = {
     chart: {
@@ -66,7 +66,7 @@ function Graph(props: Props): JSX.Element {
       }
     },
     subtitle: {
-      text: props.option,
+      text: props.selectedOption,
       style: {
         fontSize: '16px',
         fontWeight: 'bold',

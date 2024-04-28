@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, waitFor, fireEvent } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from '../App';
 
@@ -15,7 +15,7 @@ describe('App', () => {
     expect(getByText('都道府県')).toBeInTheDocument();
 
     // セレクトボックスが表示されていることを確認
-    expect(getByText('総人口')).toBeInTheDocument();
+    expect(getByTestId('select-box')).toBeInTheDocument();
 
     // グラフが表示されていることを確認
     expect(getByTestId('graph-container')).toBeInTheDocument();
@@ -55,14 +55,14 @@ describe('App', () => {
     userEvent.click(getByText('東京都'));
 
     // セレクトボックスを選択してオプションを変更する
-    fireEvent.change(getByTestId('select-box'), '年少人口');
+    userEvent.selectOptions(getByTestId('select-box'), ['年少人口']);
 
     // グラフが描画されるまで待機
     await waitFor(() => {
       expect(getByText('人口数')).toBeInTheDocument();
     });
 
-    // グラフが更新されて老年人口のデータが表示されていることを確認
+    // グラフが更新されて年少人口のデータが表示されていることを確認
     expect(getByTestId('graph-container')).toHaveTextContent('年少人口');
   });
 });
