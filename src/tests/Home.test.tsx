@@ -1,9 +1,9 @@
 import React from 'react';
 import { render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import App from '../App';
+import App from '../pages/Home';
 
-describe('App', () => {
+describe('Home', () => {
   test('ページが正しく表示される', () => {
     // コンポーネントをレンダリング
     const { getByText, getByTestId } = render(<App />);
