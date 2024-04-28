@@ -13,7 +13,7 @@ interface Props {
   selectedOption: optionType
 }
 
-function Graph (props: Props): JSX.Element {
+function Graph(props: Props): JSX.Element {
   highchartsAccessibility(Highcharts)
 
   // 各都道府県の人口推移データ

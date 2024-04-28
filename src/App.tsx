@@ -4,7 +4,7 @@ import { Routes, Route, BrowserRouter } from 'react-router-dom'
 import Home from './pages/Home'
 import NotFound from './pages/NotFound'
 
-function App (): JSX.Element {
+function App(): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
