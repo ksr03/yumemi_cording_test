@@ -11,7 +11,7 @@ interface responseType {
  * 都道府県のデータを取得する
  * @returns prefCodeとprefNameを持つ要素のリスト
  */
-export async function getPrefectures (): Promise<prefType[]> {
+export async function getPrefectures(): Promise<prefType[]> {
   try {
     const response = await axios.get<responseType>(
       baseURL + 'api/v1/prefectures',

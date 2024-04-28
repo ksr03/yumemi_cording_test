@@ -6,7 +6,7 @@ interface Props {
   updatePrefList: (pref: prefType) => void
 }
 
-function Checkbox (props: Props): JSX.Element {
+function Checkbox(props: Props): JSX.Element {
   // チェックボックスをクリックしたらリストに追加する
   const onChange: () => void = () => {
     props.updatePrefList(props.pref)
