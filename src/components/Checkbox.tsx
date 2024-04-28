@@ -1,5 +1,5 @@
-import React from 'react';
-import type { prefType } from '../types/prefType';
+import React from 'react'
+import type { prefType } from '../types/prefType'
 
 interface Props {
   pref: prefType
@@ -13,8 +13,13 @@ function Checkbox(props: Props): JSX.Element {
   }
   return (
     <>
-      <label className='checkbox-wrapper'>
-        <input className='checkbox' type='checkbox' name='test' onChange={onChange}/>
+      <label className="checkbox-wrapper">
+        <input
+          className="checkbox"
+          type="checkbox"
+          name="test"
+          onChange={onChange}
+        />
         {props.pref.prefName}
       </label>
     </>

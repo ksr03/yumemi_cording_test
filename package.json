@@ -25,7 +25,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "fmt": "prettier --write src/**/*.ts src/**/*.tsx",
+    "lint": "eslint --no-ignore ./src/index.tsx"
   },
   "eslintConfig": {
     "extends": [
@@ -67,5 +69,9 @@
     "moduleNameMapper": {
       "^axios$": "axios/dist/node/axios.cjs"
     }
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
   }
 }
