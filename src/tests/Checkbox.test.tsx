@@ -1,21 +1,17 @@
-import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
-import Checkbox from '../components/Checkbox';
-import { dummyPrefData } from '../data/dummyPrefData';
-
-// updatePrefListをモック化する
-const mockUpdatePrefList = jest.fn();
+import React from 'react'
+import { render, fireEvent } from '@testing-library/react'
+import Checkbox from '../components/Checkbox'
+import { dummyPrefData } from '../data/dummyPrefData'
 
 test('チェックボックスをクリックすると、updatePrefListが呼び出される', () => {
-  // コンポーネントをレンダリング
+  const mockUpdatePrefList = jest.fn()
+
   const { getByLabelText } = render(
     <Checkbox pref={dummyPrefData[0]} updatePrefList={mockUpdatePrefList} />
-  );
+  )
 
-  // チェックボックス要素を取得してクリックする
-  const checkbox = getByLabelText(dummyPrefData[0].prefName);
-  fireEvent.click(checkbox);
+  const checkbox = getByLabelText(dummyPrefData[0].prefName)
+  fireEvent.click(checkbox)
 
-  // updatePrefListが呼び出されたことを確認する
-  expect(mockUpdatePrefList).toHaveBeenCalledWith(dummyPrefData[0]);
-});
+  expect(mockUpdatePrefList).toHaveBeenCalledWith(dummyPrefData[0])
+})

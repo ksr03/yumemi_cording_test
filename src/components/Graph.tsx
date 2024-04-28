@@ -1,21 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import Highcharts from "highcharts";
-import HighchartsReact from "highcharts-react-official";
-import highchartsAccessibility from "highcharts/modules/accessibility";
-import type { SeriesOptionsType } from 'highcharts';
-import type { prefType } from '../types/prefType';
-import type { optionType } from '../types/optionType';
-import { getPopulation } from '../hooks/getPopulation';
-import type { populationType } from '../types/poplationType';
+import React, { useEffect, useState } from 'react'
+import Highcharts from 'highcharts'
+import HighchartsReact from 'highcharts-react-official'
+import highchartsAccessibility from 'highcharts/modules/accessibility'
+import type { SeriesOptionsType } from 'highcharts'
+import type { prefType } from '../types/prefType'
+import type { optionType } from '../types/optionType'
+import { getPopulation } from '../hooks/getPopulation'
+import type { populationType } from '../types/poplationType'
 
 interface Props {
   prefList: prefType[]
   selectedOption: optionType
 }
 
-function Graph(props: Props): JSX.Element {
-  // Highchartsのアクセシビリティモジュールの読み込み
-  highchartsAccessibility(Highcharts);
+function Graph (props: Props): JSX.Element {
+  highchartsAccessibility(Highcharts)
 
   // 各都道府県の人口推移データ
   const [series, setSeries] = useState<SeriesOptionsType[]>([])
@@ -26,16 +25,24 @@ function Graph(props: Props): JSX.Element {
    * 指定された都道府県の人口推移データを取得してセットする
    * @param pref 都道府県
    */
-  const fetchData = async(pref:prefType): Promise<void> => {
+  const fetchData = async (pref: prefType): Promise<void> => {
     try {
-      const response: populationType[]  = await getPopulation({pref})
-      if (categories.length === 0) setCategories(response[0].data.map(item => String(item.year)) ?? [])
-      setSeries(prev => {
-        return [...prev, {
-          name: pref.prefName,
-          type: 'line',
-          data: response.filter(item => item.label === props.selectedOption)[0].data.map(item => item.value) ?? []
-        }]
+      const response: populationType[] = await getPopulation({ pref })
+      if (categories.length === 0) {
+        setCategories(response[0].data.map((item) => String(item.year)) ?? [])
+      }
+      setSeries((prev) => {
+        return [
+          ...prev,
+          {
+            name: pref.prefName,
+            type: 'line',
+            data:
+              response
+                .filter((item) => item.label === props.selectedOption)[0]
+                .data.map((item) => item.value) ?? []
+          }
+        ]
       })
     } catch (error) {
       console.error(error)
@@ -46,7 +53,7 @@ function Graph(props: Props): JSX.Element {
     setSeries([])
     // 選択された全ての都道府県の人口構成データをセットする
     for (const pref of props.prefList) {
-      fetchData(pref).catch(error => {
+      fetchData(pref).catch((error) => {
         console.error(error)
       })
     }
@@ -55,7 +62,7 @@ function Graph(props: Props): JSX.Element {
   const options: Highcharts.Options = {
     chart: {
       marginRight: 50,
-      marginLeft: 100,
+      marginLeft: 100
     },
     title: {
       text: '人口推移',
@@ -70,7 +77,7 @@ function Graph(props: Props): JSX.Element {
       style: {
         fontSize: '16px',
         fontWeight: 'bold',
-        fontFamily: 'Noto Sans JP',
+        fontFamily: 'Noto Sans JP'
       }
     },
     xAxis: {
@@ -88,7 +95,7 @@ function Graph(props: Props): JSX.Element {
     yAxis: {
       title: {
         text: '人口数',
-        style: { 
+        style: {
           fontSize: '16px',
           fontWeight: 'bold',
           fontFamily: 'Noto Sans JP',
@@ -100,7 +107,7 @@ function Graph(props: Props): JSX.Element {
       itemStyle: {
         fontSize: '18px',
         fontWeight: 'bold',
-        fontFamily: 'Noto Sans JP',
+        fontFamily: 'Noto Sans JP'
       }
     },
     series,
@@ -111,7 +118,7 @@ function Graph(props: Props): JSX.Element {
 
   return (
     <div data-testid="graph-container">
-      <HighchartsReact highcharts={Highcharts} options={options}/>
+      <HighchartsReact highcharts={Highcharts} options={options} />
     </div>
   )
 }
